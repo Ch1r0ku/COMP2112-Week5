@@ -69,6 +69,30 @@ class Contact
         return outputString;
     }
 
+    /**
+     *This method converts class Data Members to a comma separetad lis compatable with JSON
+     *
+     * @returns  {string}
+     * @memberof Contact
+     */
+    public toJSON():string
+    {
+        return `${this.FullName}, ${this.ContactNumber}, ${this.EmailAddress}`
+    }
+
+    /**
+     *This method reads data from a comma-separeted list and assigns it to class Data Members
+     *
+     * @param {*} data
+     * @memberof Contact
+     */
+    public fromJSON(data:any):void
+    {
+        this.FullName = data.FullName;
+        this.ContactNumber = data.ContactNumber;
+        this.EmailAddress = data.EmailAddress;
+    }
+
     //privite methods
 
 }
