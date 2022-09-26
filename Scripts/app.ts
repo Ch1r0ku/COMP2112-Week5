@@ -14,8 +14,19 @@
             //Get your data from the DataSource
         contactList = DataSource.ContactList;     
 
-        for (const contact of contactList) {
+        let count = 0;
+        for (const contact of contactList) 
+        {
             let newContact = new Contact(contact.FullName, contact.ContactNumber, contact.EmailAddress);
+            localStorage.setItem(count.toString(), newContact.toJSON());
+            count++;
+        }
+
+        let keys = Object.keys(localStorage);
+        for (let key of keys) 
+        {
+            let newContact = new Contact();
+            newContact.fromJSON(localStorage.getItem(key));
             console.log(newContact.toString());
         }
     });
