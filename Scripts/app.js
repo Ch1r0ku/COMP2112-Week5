@@ -36,6 +36,7 @@
      *
      */
     function LoadHeader() {
+        console.log("loading header...");
         $.get("./Views/components/header.html", function (html_data) {
             $("header").html(html_data);
             //activate the current link
@@ -62,6 +63,7 @@
      *
      */
     function LoadContent() {
+        console.log("loading content...");
         let contentLink = document.title.toLowerCase();
         $.get("./Views/content/" + contentLink + ".html", function (html_data) {
             $("main").html(html_data);
@@ -73,6 +75,7 @@
      *
      */
     function LoadFooter() {
+        console.log("loading footer...");
         $.get("./Views/components/footer.html", function (html_data) {
             //vanilla javascript
             //document.getElementsByTagName("footer")[0].innerHTML = html_data;
