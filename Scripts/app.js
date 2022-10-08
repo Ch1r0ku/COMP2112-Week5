@@ -32,40 +32,35 @@
     }
     function LoadHeader() {
         $.get("./Views/components/header.html", function (html_data) {
-            //vanilla javascript
-            //document.getElementsByTagName("header")[0].innerHTML = html_data;
-            //jquery
             $("header").html(html_data);
-            switch (document.title) {
-                case "Home":
-                    $("#homePage").addClass("active");
-                    break;
-                case "About Us":
-                    $("#aboutPage").addClass("active");
-                    break;
-                case "Our Projects":
-                    $("#projectsPage").addClass("active");
-                    break;
-                case "Our Services":
-                    $("#servicesPage").addClass("active");
-                    break;
-                case "Contact Us":
-                    $("#contactPage").addClass("active");
-                    break;
-            }
-            // let navlinks = document.querySelectorAll("li>a.nav-link");
-            // for (const link of navlinks as HTMLAnchorElement[]) {
-            //     console.log(link.href);
-            // }
-            // let navLinks = $("li>a.nav-link");
-            // for (const link of navLinks) {
-            //     console.log(link.prop("href"));
-            // }
-            // $("li>a.nav-link").each(function()
-            // {
-            //     console.log($(this).prop("href"));
-            // })
+            $("li>a").on("click", function () {
+                let title = $(this).prop("id");
+                //capitalize the link and making it a title
+                document.title = title.substring(0, 1).toUpperCase() + title.substring(1);
+                LoadContent();
+                //console.log(title);
+                // document.title = $(this).prop("id");
+            });
         });
+    }
+    function LoadContent() {
+        switch (document.title) {
+            case "Home":
+                $.get("./Views/content/home.html", function (html_data) { $("main").html(html_data); });
+                break;
+            case "About":
+                $.get("./Views/content/about.html", function (html_data) { $("main").html(html_data); });
+                break;
+            case "Projects":
+                $.get("./Views/content/projects.html", function (html_data) { $("main").html(html_data); });
+                break;
+            case "Services":
+                $.get("./Views/content/services.html", function (html_data) { $("main").html(html_data); });
+                break;
+            case "Contact":
+                $.get("./Views/content/contact.html", function (html_data) { $("main").html(html_data); });
+                break;
+        }
     }
     function LoadFooter() {
         $.get("./Views/components/footer.html", function (html_data) {
@@ -78,6 +73,8 @@
     // First method of using functions
     function Start() {
         console.log("App Started!");
+        document.title = "Home";
+        LoadContent();
         LoadHeader();
         LoadFooter();
     }
