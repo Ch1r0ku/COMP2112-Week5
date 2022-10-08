@@ -30,18 +30,56 @@
         }
         return ContactArray;
     }
+    function LoadHeader() {
+        $.get("./Views/components/header.html", function (html_data) {
+            //vanilla javascript
+            //document.getElementsByTagName("header")[0].innerHTML = html_data;
+            //jquery
+            $("header").html(html_data);
+            switch (document.title) {
+                case "Home":
+                    $("#homePage").addClass("active");
+                    break;
+                case "About Us":
+                    $("#aboutPage").addClass("active");
+                    break;
+                case "Our Projects":
+                    $("#projectsPage").addClass("active");
+                    break;
+                case "Our Services":
+                    $("#servicesPage").addClass("active");
+                    break;
+                case "Contact Us":
+                    $("#contactPage").addClass("active");
+                    break;
+            }
+            // let navlinks = document.querySelectorAll("li>a.nav-link");
+            // for (const link of navlinks as HTMLAnchorElement[]) {
+            //     console.log(link.href);
+            // }
+            // let navLinks = $("li>a.nav-link");
+            // for (const link of navLinks) {
+            //     console.log(link.prop("href"));
+            // }
+            // $("li>a.nav-link").each(function()
+            // {
+            //     console.log($(this).prop("href"));
+            // })
+        });
+    }
+    function LoadFooter() {
+        $.get("./Views/components/footer.html", function (html_data) {
+            //vanilla javascript
+            //document.getElementsByTagName("footer")[0].innerHTML = html_data;
+            //jquery
+            $("footer").html(html_data);
+        });
+    }
     // First method of using functions
     function Start() {
         console.log("App Started!");
-        $.getJSON("./Data/contacts.json", function (DataSource) {
-            //Get your data from the DataSource
-            let contactList = DataSource.ContactList;
-            SaveContactListData(contactList);
-            let ContactArray = LoadContactListData();
-            for (const contact of ContactArray) {
-                console.log(contact.toString());
-            }
-        });
+        LoadHeader();
+        LoadFooter();
     }
     window.addEventListener("load", Start);
 })();
